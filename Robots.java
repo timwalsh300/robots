@@ -22,6 +22,9 @@ public class Robots {
     public enum GoalType {
         STAR, MOON, PLANET, GEAR, SILVER;
     }
+    public enum Direction {
+        NORTH, EAST, SOUTH, WEST;
+    }
     
     public static void main(String[] args) {
         Gameboard game = new Gameboard();

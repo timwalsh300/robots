@@ -156,4 +156,8 @@ public class Gameboard {
         
     }
     
+    public void moveRobot(Robots.PieceColor c, Robots.Direction d) {
+        
+    }
+    
 }

@@ -41,10 +41,10 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     
     public String getProposedSolution() {
         if (hasFoundSolution) {
-            return solution;
+            return "OptimalPlayer: " + solution;
         }
         else
-            return "No Solution Found";
+            return "OptimalPlayer: " + "No solution found";
     }
     
 }
