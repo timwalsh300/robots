@@ -16,16 +16,21 @@ package robots;
 public interface RobotsPlayer extends Runnable{
     
     // method to accept the initial gameboard from Main class
-    public void initialize(Gameboard b);
+    void initialize(String n, Gameboard b);
     
-    // Runnable requires this to be implemented; will contain player logic
-    //public void run();
+    // return the name of the player
+    String getName();
+    
+    // Runnable requires this to be implemented; will contain player logic,
+    // execute in its own thread, and automatically print the solution to the 
+    // console when complete
+    // void run();
     
     // method returns true if the player has found a solution
-    public boolean hasFoundSolution();
+    boolean hasFoundSolution();
     
     // method returns string encoding the solution; sequence of moves...
     // example: blue-north blue-east red-north...
-    public String getProposedSolution();
+    String getSolution();
     
 }

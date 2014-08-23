@@ -21,15 +21,23 @@ public class GameboardCell {
     private Robots.PieceColor occupyingRobot, goalColor;
     private Robots.GoalType goalType;
     
-    public GameboardCell(int a, int b) {
-        xPosition = b;
-        yPosition = a;
+    public GameboardCell(int column, int row) {
+        xPosition = column;
+        yPosition = row;
         
         //no barriers by default
         barrierNorth = false;
         barrierEast = false;
         barrierSouth = false;
         barrierWest = false;
+    }
+    
+    public int getX() {
+        return xPosition;
+    }
+    
+    public int getY() {
+        return yPosition;
     }
     
     public void setGoal(Robots.PieceColor pc, Robots.GoalType gt) {
@@ -67,11 +75,9 @@ public class GameboardCell {
         }
     }
     
-    public void updateDistances(int n, int e, int s, int w) {
-        distanceNorth = n;
-        distanceEast = e;
-        distanceSouth = s;
-        distanceWest = w;
+    public void updateDistances() {
+        // traverse in all directions and update distanceNorth, distanceSouth,
+        // distanceEast, and distanceWest...
     }
     
     public boolean hasBarrierNorth() {

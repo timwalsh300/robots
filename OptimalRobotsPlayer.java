@@ -18,11 +18,21 @@ package robots;
 public class OptimalRobotsPlayer implements RobotsPlayer{
     
     private Gameboard initialBoard;
-    private String solution;
+    private String name, solution;
     private boolean hasFoundSolution = false;
     
-    public void initialize(Gameboard b) {
+    public void initialize(String n, Gameboard b) {
+        name = n;
         initialBoard = b;
+    }
+    
+    public String getName() throws NullPointerException {
+        try {
+            return name;
+        }
+        catch (NullPointerException e) {
+            return "The player has not yet been intitialized.";
+        }
     }
     
     //must override the run() method for actions to perform in its own thread
@@ -30,21 +40,24 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     public void run() {
         
         // insert player logic here
+        // stupid example of manipulating the gameboard:
+        initialBoard.moveRobot(Robots.PieceColor.RED, Robots.Direction.EAST);
+        hasFoundSolution = initialBoard.boardIsSolved();
         
         // print solution to the console when done
-        System.out.println(getProposedSolution());
+        System.out.println(getSolution());
     }
     
     public boolean hasFoundSolution() {
         return hasFoundSolution;
     }
     
-    public String getProposedSolution() {
+    public String getSolution() {
         if (hasFoundSolution) {
-            return "OptimalPlayer: " + solution;
+            return this.getName() + ": " + solution;
         }
         else
-            return "OptimalPlayer: " + "No solution found";
+            return this.getName() + " has no solution.";
     }
     
 }

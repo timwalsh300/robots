@@ -31,11 +31,11 @@ public class Robots {
         System.out.println("add breakpoint here to debug");
         
         OptimalRobotsPlayer player1 = new OptimalRobotsPlayer();
-        player1.initialize(game);
+        player1.initialize("player1", game);
         Thread thread1 = new Thread(player1);
         
         // AnotherPlayer player2 = new AnotherPlayer();
-        // player2.initialize(game);
+        // player2.initialize("player2", game);
         // Thread thread2 = new Thread(player2);
         
         thread1.start();
