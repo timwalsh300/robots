@@ -27,11 +27,9 @@ public class Robots {
     }
     
     public static void main(String[] args) {
-        Gameboard game = new Gameboard();
-        System.out.println("add breakpoint here to debug");
         
         OptimalRobotsPlayer player1 = new OptimalRobotsPlayer();
-        player1.initialize("player1", game);
+        player1.initialize("player1", new Gameboard());
         Thread thread1 = new Thread(player1);
         
         // AnotherPlayer player2 = new AnotherPlayer();
@@ -41,6 +39,8 @@ public class Robots {
         thread1.start();
         // thread2.start();
         // etc.
+        
+        System.out.println("toggle breakpoint here to debug");
         
     }
     

@@ -67,17 +67,47 @@ public class GameboardCell {
     }
     
     public void setOccupied(Robots.PieceColor pc) {
-        if (pc == null)
+        if (pc == null) {
             isOccupied = false;
+            occupyingRobot = null;
+        }
         else {
             isOccupied = true;
             occupyingRobot = pc;
         }
     }
     
-    public void updateDistances() {
+    public void updateDistances(GameboardCell[][] board) {
         // traverse in all directions and update distanceNorth, distanceSouth,
         // distanceEast, and distanceWest...
+        distanceNorth = 0;
+        for (int i = yPosition; i > 0; i--) {
+            if (board[xPosition][i].hasBarrierNorth() || board[xPosition][i-1].isOccupied())
+                break;
+            else
+                distanceNorth++;
+        }
+        distanceEast = 0;
+        for (int i = xPosition; i < 16; i++) {
+            if (board[i][yPosition].hasBarrierEast() || board[i+1][yPosition].isOccupied())
+                break;
+            else
+                distanceEast++;
+        }
+        distanceSouth = 0;
+        for (int i = yPosition; i < 16; i++) {
+            if (board[xPosition][i].hasBarrierSouth() || board[xPosition][i+1].isOccupied())
+                break;
+            else
+                distanceSouth++;
+        }
+        distanceWest = 0;
+        for (int i = xPosition; i > 0; i--) {
+            if (board[i][yPosition].hasBarrierWest() || board[i-1][yPosition].isOccupied())
+                break;
+            else
+                distanceWest++;
+        }
     }
     
     public boolean hasBarrierNorth() {

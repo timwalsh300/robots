@@ -18,7 +18,7 @@ package robots;
 public class OptimalRobotsPlayer implements RobotsPlayer{
     
     private Gameboard initialBoard;
-    private String name, solution;
+    private String name, solution = " ";
     private boolean hasFoundSolution = false;
     
     public void initialize(String n, Gameboard b) {
@@ -41,7 +41,8 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
         
         // insert player logic here
         // stupid example of manipulating the gameboard:
-        initialBoard.moveRobot(Robots.PieceColor.RED, Robots.Direction.EAST);
+        initialBoard.moveRobot(Robots.PieceColor.RED, Robots.Direction.NORTH);
+        solution += "RED-NORTH";
         hasFoundSolution = initialBoard.boardIsSolved();
         
         // print solution to the console when done
@@ -54,7 +55,7 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     
     public String getSolution() {
         if (hasFoundSolution) {
-            return this.getName() + ": " + solution;
+            return this.getName() + ":" + solution;
         }
         else
             return this.getName() + " has no solution.";

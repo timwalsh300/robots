@@ -144,7 +144,7 @@ public class Gameboard {
         board[11][15].setBarrierEast(true);
         board[12][15].setBarrierWest(true);
         
-        // record initial locations of goals
+        // set and record initial locations of goals
         board[9][1].setGoal(Robots.PieceColor.GREEN, Robots.GoalType.STAR);
         greenStar = new GameboardCell(9,1);
         board[5][2].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.STAR);
@@ -180,16 +180,26 @@ public class Gameboard {
         board[9][14].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.MOON);
         blueMoon = new GameboardCell(9,14);        
         
-        //record initial locations of goals and robots
+        // set and record initial locations of robots
         board[0][13].setOccupied(Robots.PieceColor.BLUE);
         blueRobot = new GameboardCell(0,13);
         board[3][14].setOccupied(Robots.PieceColor.GREEN); //moved one place to the right from the picture
         greenRobot = new GameboardCell(3,14);
-        board[0][15].setOccupied(Robots.PieceColor.RED);
-        redRobot = new GameboardCell(0,15);
+        board[13][15].setOccupied(Robots.PieceColor.RED); //changed for testing
+        redRobot = new GameboardCell(13,15); //changed for testing
         board[1][15].setOccupied(Robots.PieceColor.YELLOW);
         yellowRobot = new GameboardCell(1,15);
         
+        // flip a card
+        desiredGoalType = Robots.GoalType.STAR;
+        desiredGoalColor = Robots.PieceColor.RED;
+        
+        // determine initial distances to barriers/robots in all directions from each cell
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                board[i][j].updateDistances(this.board);
+            }
+        }
     }
     
     public boolean boardIsSolved() {
@@ -218,8 +228,8 @@ public class Gameboard {
                 oldY = greenRobot.getY();
                 break;
             case SILVER:
-                oldX = greenRobot.getX();
-                oldY = greenRobot.getY();
+                oldX = silverRobot.getX();
+                oldY = silverRobot.getY();
                 break; 
             default:
                 oldX = -1;
@@ -254,8 +264,19 @@ public class Gameboard {
         // update the board
         board[oldX][oldY].setOccupied(null);
         board[newX][newY].setOccupied(c);
-        // must update distance for these rows and columns...
-        // iterate through all GameboardCells and call update method...
+        // update distances for these rows and columns
+        for (int i = 0; i < 16; i++) {
+            board[i][oldY].updateDistances(board);
+        }
+        for (int i = 0; i < 16; i++) {
+            board[i][newY].updateDistances(board);
+        }
+        for (int i = 0; i < 16; i++) {
+            board[oldX][i].updateDistances(board);
+        }
+        for (int i = 0; i < 16; i++) {
+            board[newX][i].updateDistances(board);
+        }
         
         // record the new location
         switch (c) {
