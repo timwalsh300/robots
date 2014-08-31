@@ -183,10 +183,10 @@ public class Gameboard {
         // set and record initial locations of robots
         board[0][13].setOccupied(Robots.PieceColor.BLUE);
         blueRobot = new GameboardCell(0,13);
-        board[3][14].setOccupied(Robots.PieceColor.GREEN); //moved one place to the right from the picture
-        greenRobot = new GameboardCell(3,14);
-        board[13][15].setOccupied(Robots.PieceColor.RED); //changed for testing
-        redRobot = new GameboardCell(13,15); //changed for testing
+        board[2][14].setOccupied(Robots.PieceColor.GREEN);
+        greenRobot = new GameboardCell(2,14);
+        board[0][15].setOccupied(Robots.PieceColor.RED);
+        redRobot = new GameboardCell(0,15);
         board[1][15].setOccupied(Robots.PieceColor.YELLOW);
         yellowRobot = new GameboardCell(1,15);
         
@@ -200,6 +200,41 @@ public class Gameboard {
                 board[i][j].updateDistances(this.board);
             }
         }
+    }
+    
+    // copy constructor
+    public Gameboard(Gameboard g) {
+        board = new GameboardCell[16][16];
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                board[i][j] = new GameboardCell(g.board[i][j]);
+            }
+        }
+        redRobot = new GameboardCell(redRobot);
+        blueRobot = new GameboardCell(blueRobot);
+        greenRobot = new GameboardCell(greenRobot);
+        yellowRobot = new GameboardCell(yellowRobot);
+        silverRobot = new GameboardCell(silverRobot);
+        redStar = new GameboardCell(redStar);
+        redPlanet = new GameboardCell(redPlanet);
+        redMoon = new GameboardCell(redMoon);
+        redGear = new GameboardCell(redGear);
+        blueStar = new GameboardCell(blueStar);
+        bluePlanet = new GameboardCell(bluePlanet);
+        blueMoon = new GameboardCell(blueMoon);
+        blueGear = new GameboardCell(blueGear);
+        yellowStar = new GameboardCell(yellowStar);
+        yellowPlanet = new GameboardCell(yellowPlanet);
+        yellowMoon = new GameboardCell(yellowMoon);
+        yellowGear = new GameboardCell(yellowGear);
+        greenStar = new GameboardCell(greenStar);
+        greenPlanet = new GameboardCell(greenPlanet);
+        greenMoon = new GameboardCell(greenMoon);
+        greenGear = new GameboardCell(greenGear);
+        silverGoal = new GameboardCell(silverGoal);
+        desiredGoalType = g.desiredGoalType;
+        desiredGoalColor = g.desiredGoalColor;
+        boardIsSolved = g.boardIsSolved();
     }
     
     public boolean boardIsSolved() {

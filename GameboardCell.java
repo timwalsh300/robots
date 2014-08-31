@@ -21,7 +21,8 @@ public class GameboardCell {
     private Robots.PieceColor occupyingRobot, goalColor;
     private Robots.GoalType goalType;
     
-    public GameboardCell(int column, int row) {
+    // constructor
+    GameboardCell(int column, int row) {
         xPosition = column;
         yPosition = row;
         
@@ -30,6 +31,25 @@ public class GameboardCell {
         barrierEast = false;
         barrierSouth = false;
         barrierWest = false;
+    }
+    
+    // copy contstructor
+    GameboardCell(GameboardCell g) {
+        xPosition = g.getX();
+        yPosition = g.getY();
+        barrierNorth = g.hasBarrierNorth();
+        barrierEast = g.hasBarrierEast();
+        barrierSouth = g.hasBarrierSouth();
+        barrierWest = g.hasBarrierWest();
+        distanceNorth = g.checkDistanceNorth();
+        distanceEast = g.checkDistanceEast();
+        distanceSouth = g.checkDistanceSouth();
+        distanceWest = g.checkDistanceWest();
+        isOccupied = g.isOccupied();
+        isGoal = g.isGoal();
+        occupyingRobot = g.getOccupyingRobot();
+        goalColor = g.getGoalColor();
+        goalType = g.getGoalType();
     }
     
     public int getX() {
