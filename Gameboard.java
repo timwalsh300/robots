@@ -21,8 +21,8 @@ public class Gameboard {
     private GameboardCell greenStar, greenMoon, greenPlanet, greenGear;
     private GameboardCell yellowStar, yellowMoon, yellowPlanet, yellowGear;
     private GameboardCell silverGoal;
-    private Robots.GoalType desiredGoalType;
-    private Robots.PieceColor desiredGoalColor;
+    private GoalType desiredGoalType;
+    private PieceColor desiredGoalColor;
     private boolean boardIsSolved = false;
     
     // let's hardcode barrier, goal, and robot positions for now, and
@@ -145,54 +145,56 @@ public class Gameboard {
         board[12][15].setBarrierWest(true);
         
         // set and record initial locations of goals
-        board[9][1].setGoal(Robots.PieceColor.GREEN, Robots.GoalType.STAR);
+        board[9][1].setGoal(PieceColor.GREEN, GoalType.STAR);
         greenStar = new GameboardCell(9,1);
-        board[5][2].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.STAR);
+        board[5][2].setGoal(PieceColor.BLUE, GoalType.STAR);
         blueStar = new GameboardCell(5,2);
-        board[14][2].setGoal(Robots.PieceColor.YELLOW, Robots.GoalType.MOON);
+        board[14][2].setGoal(PieceColor.YELLOW, GoalType.MOON);
         yellowMoon = new GameboardCell(14,2);
-        board[2][4].setGoal(Robots.PieceColor.GREEN, Robots.GoalType.MOON);
+        board[2][4].setGoal(PieceColor.GREEN, GoalType.MOON);
         greenMoon = new GameboardCell(2,4);
-        board[10][4].setGoal(Robots.PieceColor.RED, Robots.GoalType.PLANET);
+        board[10][4].setGoal(PieceColor.RED, GoalType.PLANET);
         redPlanet = new GameboardCell(10,4);
-        board[7][5].setGoal(Robots.PieceColor.RED, Robots.GoalType.GEAR);
+        board[7][5].setGoal(PieceColor.RED, GoalType.GEAR);
         redGear = new GameboardCell(7,5);
-        board[1][6].setGoal(Robots.PieceColor.YELLOW, Robots.GoalType.PLANET);
+        board[1][6].setGoal(PieceColor.YELLOW, GoalType.PLANET);
         yellowPlanet = new GameboardCell(1,6);
-        board[12][6].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.GEAR);
+        board[12][6].setGoal(PieceColor.BLUE, GoalType.GEAR);
         blueGear = new GameboardCell(12,6);
-        board[3][9].setGoal(Robots.PieceColor.YELLOW, Robots.GoalType.STAR);
+        board[3][9].setGoal(PieceColor.YELLOW, GoalType.STAR);
         yellowStar = new GameboardCell(3,9);
-        board[8][10].setGoal(Robots.PieceColor.SILVER, Robots.GoalType.SILVER);
+        board[8][10].setGoal(PieceColor.SILVER, GoalType.SILVER);
         silverGoal = new GameboardCell(8,10);
-        board[13][10].setGoal(Robots.PieceColor.RED, Robots.GoalType.STAR);
+        board[13][10].setGoal(PieceColor.RED, GoalType.STAR);
         redStar = new GameboardCell(13,10);
-        board[1][11].setGoal(Robots.PieceColor.RED, Robots.GoalType.MOON);
+        board[1][11].setGoal(PieceColor.RED, GoalType.MOON);
         redMoon = new GameboardCell(1,11);
-        board[10][11].setGoal(Robots.PieceColor.GREEN, Robots.GoalType.PLANET);
+        board[10][11].setGoal(PieceColor.GREEN, GoalType.PLANET);
         greenPlanet = new GameboardCell(10,11);
-        board[6][12].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.PLANET);
+        board[6][12].setGoal(PieceColor.BLUE, GoalType.PLANET);
         bluePlanet = new GameboardCell(6,12);
-        board[9][1].setGoal(Robots.PieceColor.YELLOW, Robots.GoalType.GEAR);
+        board[9][1].setGoal(PieceColor.YELLOW, GoalType.GEAR);
         yellowGear = new GameboardCell(9,1);
-        board[2][14].setGoal(Robots.PieceColor.GREEN, Robots.GoalType.GEAR);
+        board[2][14].setGoal(PieceColor.GREEN, GoalType.GEAR);
         greenGear = new GameboardCell(2,14);
-        board[9][14].setGoal(Robots.PieceColor.BLUE, Robots.GoalType.MOON);
+        board[9][14].setGoal(PieceColor.BLUE, GoalType.MOON);
         blueMoon = new GameboardCell(9,14);        
         
         // set and record initial locations of robots
-        board[0][13].setOccupied(Robots.PieceColor.BLUE);
+        board[0][13].setOccupied(PieceColor.BLUE);
         blueRobot = new GameboardCell(0,13);
-        board[2][14].setOccupied(Robots.PieceColor.GREEN);
+        board[2][14].setOccupied(PieceColor.GREEN);
         greenRobot = new GameboardCell(2,14);
-        board[0][15].setOccupied(Robots.PieceColor.RED);
-        redRobot = new GameboardCell(0,15);
-        board[1][15].setOccupied(Robots.PieceColor.YELLOW);
+        board[15][15].setOccupied(PieceColor.RED); //changed from the picture to make solution easier
+        redRobot = new GameboardCell(15,15);
+        board[1][15].setOccupied(PieceColor.YELLOW);
         yellowRobot = new GameboardCell(1,15);
+        board[12][15].setOccupied(PieceColor.SILVER); //adding this one to make solution easy; not the picture
+        silverRobot = new GameboardCell(12,15);
         
         // flip a card
-        desiredGoalType = Robots.GoalType.STAR;
-        desiredGoalColor = Robots.PieceColor.RED;
+        desiredGoalType = GoalType.STAR;
+        desiredGoalColor = PieceColor.RED;
         
         // determine initial distances to barriers/robots in all directions from each cell
         for (int i = 0; i < 16; i++) {
@@ -210,28 +212,28 @@ public class Gameboard {
                 board[i][j] = new GameboardCell(g.board[i][j]);
             }
         }
-        redRobot = new GameboardCell(redRobot);
-        blueRobot = new GameboardCell(blueRobot);
-        greenRobot = new GameboardCell(greenRobot);
-        yellowRobot = new GameboardCell(yellowRobot);
-        silverRobot = new GameboardCell(silverRobot);
-        redStar = new GameboardCell(redStar);
-        redPlanet = new GameboardCell(redPlanet);
-        redMoon = new GameboardCell(redMoon);
-        redGear = new GameboardCell(redGear);
-        blueStar = new GameboardCell(blueStar);
-        bluePlanet = new GameboardCell(bluePlanet);
-        blueMoon = new GameboardCell(blueMoon);
-        blueGear = new GameboardCell(blueGear);
-        yellowStar = new GameboardCell(yellowStar);
-        yellowPlanet = new GameboardCell(yellowPlanet);
-        yellowMoon = new GameboardCell(yellowMoon);
-        yellowGear = new GameboardCell(yellowGear);
-        greenStar = new GameboardCell(greenStar);
-        greenPlanet = new GameboardCell(greenPlanet);
-        greenMoon = new GameboardCell(greenMoon);
-        greenGear = new GameboardCell(greenGear);
-        silverGoal = new GameboardCell(silverGoal);
+        redRobot = new GameboardCell(g.redRobot);
+        blueRobot = new GameboardCell(g.blueRobot);
+        greenRobot = new GameboardCell(g.greenRobot);
+        yellowRobot = new GameboardCell(g.yellowRobot);
+        silverRobot = new GameboardCell(g.silverRobot);
+        redStar = new GameboardCell(g.redStar);
+        redPlanet = new GameboardCell(g.redPlanet);
+        redMoon = new GameboardCell(g.redMoon);
+        redGear = new GameboardCell(g.redGear);
+        blueStar = new GameboardCell(g.blueStar);
+        bluePlanet = new GameboardCell(g.bluePlanet);
+        blueMoon = new GameboardCell(g.blueMoon);
+        blueGear = new GameboardCell(g.blueGear);
+        yellowStar = new GameboardCell(g.yellowStar);
+        yellowPlanet = new GameboardCell(g.yellowPlanet);
+        yellowMoon = new GameboardCell(g.yellowMoon);
+        yellowGear = new GameboardCell(g.yellowGear);
+        greenStar = new GameboardCell(g.greenStar);
+        greenPlanet = new GameboardCell(g.greenPlanet);
+        greenMoon = new GameboardCell(g.greenMoon);
+        greenGear = new GameboardCell(g.greenGear);
+        silverGoal = new GameboardCell(g.silverGoal);
         desiredGoalType = g.desiredGoalType;
         desiredGoalColor = g.desiredGoalColor;
         boardIsSolved = g.boardIsSolved();
@@ -241,7 +243,49 @@ public class Gameboard {
         return boardIsSolved;
     }
     
-    public void moveRobot(Robots.PieceColor c, Robots.Direction d) {
+    public boolean robotCanMove(PieceColor c, Direction d) {
+        int xCheck, yCheck;
+        switch (c) {
+            case RED:
+                xCheck = redRobot.getX();
+                yCheck = redRobot.getY();
+                break;
+            case BLUE:
+                xCheck = blueRobot.getX();
+                yCheck = blueRobot.getY();
+                break;
+            case YELLOW:
+                xCheck = yellowRobot.getX();
+                yCheck = yellowRobot.getY();
+                break;
+            case GREEN:
+                xCheck = greenRobot.getX();
+                yCheck = greenRobot.getY();
+                break;
+            case SILVER:
+                xCheck = silverRobot.getX();
+                yCheck = silverRobot.getY();
+                break; 
+            default:
+                xCheck = -1;
+                yCheck = -1;
+                break;
+        }
+        switch (d) {
+            case NORTH:
+                return !board[xCheck][yCheck].hasBarrierNorth();
+            case EAST:
+                return !board[xCheck][yCheck].hasBarrierEast();
+            case SOUTH:
+                return !board[xCheck][yCheck].hasBarrierSouth();
+            case WEST:
+                return !board[xCheck][yCheck].hasBarrierWest();
+            default:
+                return false;
+        }
+    }
+    
+    public void moveRobot(PieceColor c, Direction d) {
         int oldX, oldY, newX, newY, distance;
         
         // find the robot to move

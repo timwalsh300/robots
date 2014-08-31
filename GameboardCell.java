@@ -18,8 +18,8 @@ public class GameboardCell {
     private boolean barrierNorth, barrierEast, barrierSouth, barrierWest;
     private int distanceNorth, distanceEast, distanceSouth, distanceWest;
     private boolean isOccupied, isGoal;
-    private Robots.PieceColor occupyingRobot, goalColor;
-    private Robots.GoalType goalType;
+    private PieceColor occupyingRobot, goalColor;
+    private GoalType goalType;
     
     // constructor
     GameboardCell(int column, int row) {
@@ -60,7 +60,7 @@ public class GameboardCell {
         return yPosition;
     }
     
-    public void setGoal(Robots.PieceColor pc, Robots.GoalType gt) {
+    public void setGoal(PieceColor pc, GoalType gt) {
         if (pc == null || gt == null)
             isGoal = false;
         else {
@@ -86,7 +86,7 @@ public class GameboardCell {
         barrierWest = w;
     }
     
-    public void setOccupied(Robots.PieceColor pc) {
+    public void setOccupied(PieceColor pc) {
         if (pc == null) {
             isOccupied = false;
             occupyingRobot = null;
@@ -170,15 +170,15 @@ public class GameboardCell {
         return isGoal;
     }
     
-    public Robots.PieceColor getOccupyingRobot() {
+    public PieceColor getOccupyingRobot() {
         return occupyingRobot;
     }
     
-    public Robots.GoalType getGoalType() {
+    public GoalType getGoalType() {
         return goalType;
     }
     
-    public Robots.PieceColor getGoalColor() {
+    public PieceColor getGoalColor() {
         return goalColor;
     }
     

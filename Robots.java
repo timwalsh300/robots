@@ -16,16 +16,6 @@ package robots;
  */
 public class Robots {
 
-    public enum PieceColor {
-        RED, BLUE, YELLOW, GREEN, SILVER;
-    }
-    public enum GoalType {
-        STAR, MOON, PLANET, GEAR, SILVER;
-    }
-    public enum Direction {
-        NORTH, EAST, SOUTH, WEST;
-    }
-    
     public static void main(String[] args) {
         
         OptimalRobotsPlayer player1 = new OptimalRobotsPlayer();
@@ -39,9 +29,6 @@ public class Robots {
         thread1.start();
         // thread2.start();
         // etc.
-        
-        System.out.println("toggle breakpoint here to debug");
-        
     }
     
 }
