@@ -19,7 +19,7 @@ public class Robots {
     public static void main(String[] args) {
         
         OptimalRobotsPlayer player1 = new OptimalRobotsPlayer();
-        player1.initialize("player1", new Gameboard());
+        player1.initialize("OptimalPlayer", new Gameboard());
         Thread thread1 = new Thread(player1);
         
         // AnotherPlayer player2 = new AnotherPlayer();

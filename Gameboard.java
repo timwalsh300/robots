@@ -185,12 +185,12 @@ public class Gameboard {
         blueRobot = new GameboardCell(0,13);
         board[2][14].setOccupied(PieceColor.GREEN);
         greenRobot = new GameboardCell(2,14);
-        board[15][15].setOccupied(PieceColor.RED); //changed from the picture to make solution easier
-        redRobot = new GameboardCell(15,15);
+        board[0][15].setOccupied(PieceColor.RED);
+        redRobot = new GameboardCell(0,15);
         board[1][15].setOccupied(PieceColor.YELLOW);
         yellowRobot = new GameboardCell(1,15);
-        board[12][15].setOccupied(PieceColor.SILVER); //adding this one to make solution easy; not the picture
-        silverRobot = new GameboardCell(12,15);
+        //board[12][15].setOccupied(PieceColor.SILVER);
+        //silverRobot = new GameboardCell(12,15);
         
         // flip a card
         desiredGoalType = GoalType.STAR;
@@ -216,7 +216,7 @@ public class Gameboard {
         blueRobot = new GameboardCell(g.blueRobot);
         greenRobot = new GameboardCell(g.greenRobot);
         yellowRobot = new GameboardCell(g.yellowRobot);
-        silverRobot = new GameboardCell(g.silverRobot);
+        //silverRobot = new GameboardCell(g.silverRobot);
         redStar = new GameboardCell(g.redStar);
         redPlanet = new GameboardCell(g.redPlanet);
         redMoon = new GameboardCell(g.redMoon);
@@ -262,10 +262,10 @@ public class Gameboard {
                 xCheck = greenRobot.getX();
                 yCheck = greenRobot.getY();
                 break;
-            case SILVER:
-                xCheck = silverRobot.getX();
-                yCheck = silverRobot.getY();
-                break; 
+//            case SILVER:
+//                xCheck = silverRobot.getX();
+//                yCheck = silverRobot.getY();
+//                break; 
             default:
                 xCheck = -1;
                 yCheck = -1;
@@ -286,7 +286,7 @@ public class Gameboard {
     }
     
     public void moveRobot(PieceColor c, Direction d) {
-        int oldX, oldY, newX, newY, distance;
+        int oldX, oldY, newX, newY;
         
         // find the robot to move
         switch (c) {
@@ -306,10 +306,10 @@ public class Gameboard {
                 oldX = greenRobot.getX();
                 oldY = greenRobot.getY();
                 break;
-            case SILVER:
-                oldX = silverRobot.getX();
-                oldY = silverRobot.getY();
-                break; 
+//            case SILVER:
+//                oldX = silverRobot.getX();
+//                oldY = silverRobot.getY();
+//                break; 
             default:
                 oldX = -1;
                 oldY = -1;
@@ -371,9 +371,9 @@ public class Gameboard {
             case GREEN:
                 greenRobot = new GameboardCell(newX, newY);
                 break;
-            case SILVER:
-                silverRobot = new GameboardCell(newX, newY);
-                break;
+//            case SILVER:
+//                silverRobot = new GameboardCell(newX, newY);
+//                break;
         }
         
         // check for solution
