@@ -10,6 +10,7 @@ package robots;
  *
  * @author user
  */
+@Deprecated
 public enum GoalType {
     STAR, MOON, PLANET, GEAR, SILVER;
 }

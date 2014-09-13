@@ -16,7 +16,7 @@ package robots;
 public interface RobotsPlayer extends Runnable{
     
     // method to accept the initial gameboard from Main class
-    void initialize(String n, Gameboard b);
+    void initialize(String n, GameboardLW b);
     
     // return the name of the player
     String getName();

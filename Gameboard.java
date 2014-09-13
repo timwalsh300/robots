@@ -12,6 +12,7 @@ package robots;
 /**
  * This is the class that will be instantiated to represent the game board.
  */
+@Deprecated
 public class Gameboard {
     
     private GameboardCell[][] board;

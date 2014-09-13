@@ -10,6 +10,7 @@ package robots;
  *
  * @author user
  */
+@Deprecated
 public enum PieceColor {
     RED, BLUE, YELLOW, GREEN, SILVER;
 }

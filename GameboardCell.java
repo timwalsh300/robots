@@ -12,6 +12,7 @@ package robots;
 /**
  * Instances of this class will fill up the game board.
  */
+@Deprecated
 public class GameboardCell {
     
     private final int xPosition, yPosition;
