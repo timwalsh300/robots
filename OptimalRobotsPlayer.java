@@ -19,7 +19,7 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     
     private GameboardLW initialBoard;
     private String name, solution = " ";
-    private int bestNumberOfMoves = 7;
+    private int bestNumberOfMoves = 5; // this initial number is the maximum depth to search
     private int statesExamined = 0;
     private boolean hasFoundSolution = false;
     
@@ -69,6 +69,8 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
         private TreeNode yellowNorth, yellowEast, yellowSouth, yellowWest;
         private TreeNode greenNorth, greenEast, greenSouth, greenWest;
         private String solutionThusFar;
+        private RobotPiece lastRobot;
+        private Direction lastDir;
         
         TreeNode(int n, String s, GameboardLW g, RobotPiece pc, Direction d) {
             depth = n;
@@ -76,11 +78,13 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
             gameState = new GameboardLW(g);
             if (pc != null && d != null)
                 gameState.moveRobot(pc, d);
+            lastRobot = pc;
+            lastDir = d;
         }
         
         public void buildAndSearchTree() {
             System.out.println(statesExamined++);
-            if (depth == bestNumberOfMoves) {
+            if (depth > bestNumberOfMoves) {
                 return;
             }
             else if (gameState.boardIsSolved()) {
@@ -90,67 +94,83 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
                 return;
             }
             else {
-                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.NORTH)) {
+                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.NORTH) &&
+                        (lastRobot != RobotPiece.RED_ROBOT && lastDir != Direction.SOUTH)) {
                     redNorth = new TreeNode(depth + 1, solutionThusFar + "Red-North ", gameState, RobotPiece.RED_ROBOT, Direction.NORTH);
                     redNorth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.EAST)) {
+                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.EAST) &&
+                        (lastRobot != RobotPiece.RED_ROBOT && lastDir != Direction.WEST)) {
                     redEast = new TreeNode(depth + 1, solutionThusFar + "Red-East ", gameState, RobotPiece.RED_ROBOT, Direction.EAST);
                     redEast.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.SOUTH)) {
+                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.SOUTH) &&
+                        (lastRobot != RobotPiece.RED_ROBOT && lastDir != Direction.NORTH)) {
                     redSouth = new TreeNode(depth + 1, solutionThusFar + "Red-South ", gameState, RobotPiece.RED_ROBOT, Direction.SOUTH);
                     redSouth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.WEST)) {
+                if (gameState.robotCanMove(RobotPiece.RED_ROBOT, Direction.WEST) &&
+                        (lastRobot != RobotPiece.RED_ROBOT && lastDir != Direction.EAST)) {
                     redWest = new TreeNode(depth + 1, solutionThusFar + "Red-West ", gameState, RobotPiece.RED_ROBOT, Direction.WEST);
                     redWest.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.NORTH)) {
+                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.NORTH) &&
+                        (lastRobot != RobotPiece.BLUE_ROBOT && lastDir != Direction.SOUTH)) {
                     blueNorth = new TreeNode(depth + 1, solutionThusFar + "Blue-North ", gameState, RobotPiece.BLUE_ROBOT, Direction.NORTH);
                     blueNorth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.EAST)) {
+                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.EAST) &&
+                        (lastRobot != RobotPiece.BLUE_ROBOT && lastDir != Direction.WEST)) {
                     blueEast = new TreeNode(depth + 1, solutionThusFar + "Blue-East ", gameState, RobotPiece.BLUE_ROBOT, Direction.EAST);
                     blueEast.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.SOUTH)) {
+                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.SOUTH) &&
+                        (lastRobot != RobotPiece.BLUE_ROBOT && lastDir != Direction.NORTH)) {
                     blueSouth = new TreeNode(depth + 1, solutionThusFar + "Blue-South ", gameState, RobotPiece.BLUE_ROBOT, Direction.SOUTH);
                     blueSouth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.WEST)) {
+                if (gameState.robotCanMove(RobotPiece.BLUE_ROBOT, Direction.WEST) &&
+                        (lastRobot != RobotPiece.BLUE_ROBOT && lastDir != Direction.EAST)) {
                     blueWest = new TreeNode(depth + 1, solutionThusFar + "Blue-West ", gameState, RobotPiece.BLUE_ROBOT, Direction.WEST);
                     blueWest.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.NORTH)) {
+                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.NORTH) &&
+                        (lastRobot != RobotPiece.YELLOW_ROBOT && lastDir != Direction.SOUTH)) {
                     yellowNorth = new TreeNode(depth + 1, solutionThusFar + "Yellow-North ", gameState, RobotPiece.YELLOW_ROBOT, Direction.NORTH);
                     yellowNorth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.EAST)) {
+                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.EAST) &&
+                        (lastRobot != RobotPiece.YELLOW_ROBOT && lastDir != Direction.WEST)) {
                     yellowEast = new TreeNode(depth + 1, solutionThusFar + "Yellow-East ", gameState, RobotPiece.YELLOW_ROBOT, Direction.EAST);
                     yellowEast.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.SOUTH)) {
+                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.SOUTH) &&
+                        (lastRobot != RobotPiece.YELLOW_ROBOT && lastDir != Direction.NORTH)) {
                     yellowSouth = new TreeNode(depth + 1, solutionThusFar + "Yellow-South ", gameState, RobotPiece.YELLOW_ROBOT, Direction.SOUTH);
                     yellowSouth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.WEST)) {
+                if (gameState.robotCanMove(RobotPiece.YELLOW_ROBOT, Direction.WEST) &&
+                        (lastRobot != RobotPiece.YELLOW_ROBOT && lastDir != Direction.EAST)) {
                     yellowWest = new TreeNode(depth + 1, solutionThusFar + "Yellow-West ", gameState, RobotPiece.YELLOW_ROBOT, Direction.WEST);
                     yellowWest.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.NORTH)) {
+                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.NORTH) &&
+                        (lastRobot != RobotPiece.GREEN_ROBOT && lastDir != Direction.SOUTH)) {
                     greenNorth = new TreeNode(depth + 1, solutionThusFar + "Green-North ", gameState, RobotPiece.GREEN_ROBOT, Direction.NORTH);
                     greenNorth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.EAST)) {
+                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.EAST) &&
+                        (lastRobot != RobotPiece.GREEN_ROBOT && lastDir != Direction.WEST)) {
                     greenEast = new TreeNode(depth + 1, solutionThusFar + "Green-East ", gameState, RobotPiece.GREEN_ROBOT, Direction.EAST);
                     greenEast.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.SOUTH)) {
+                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.SOUTH) &&
+                        (lastRobot != RobotPiece.GREEN_ROBOT && lastDir != Direction.NORTH)) {
                     greenSouth = new TreeNode(depth + 1, solutionThusFar + "Green-South ", gameState, RobotPiece.GREEN_ROBOT, Direction.SOUTH);
                     greenSouth.buildAndSearchTree();
                 }
-                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.WEST)) {
+                if (gameState.robotCanMove(RobotPiece.GREEN_ROBOT, Direction.WEST) &&
+                        (lastRobot != RobotPiece.GREEN_ROBOT && lastDir != Direction.EAST)) {
                     greenWest = new TreeNode(depth + 1, solutionThusFar + "Green-West ", gameState, RobotPiece.GREEN_ROBOT, Direction.WEST);
                     greenWest.buildAndSearchTree();
                 }

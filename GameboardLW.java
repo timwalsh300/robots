@@ -173,14 +173,14 @@ public class GameboardLW {
         goalLocations[2][14] = Goal.GREEN_GEAR;
         goalLocations[9][14] = Goal.BLUE_MOON;
         
-        robotLocations[0][13] = RobotPiece.BLUE_ROBOT;
-        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 0, 13);
-        robotLocations[0][15] = RobotPiece.RED_ROBOT;
-        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 0, 15);
-        robotLocations[2][14] = RobotPiece.GREEN_ROBOT;
+        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 13, 13);
+        robotLocations[blueRobot.column()][blueRobot.row()] = RobotPiece.BLUE_ROBOT;
+        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 15, 9);
+        robotLocations[redRobot.column()][redRobot.row()] = RobotPiece.RED_ROBOT;
         greenRobot = new RobotBookmark(RobotPiece.GREEN_ROBOT, 2, 14);
-        robotLocations[1][15] = RobotPiece.YELLOW_ROBOT;
-        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 1, 15);
+        robotLocations[greenRobot.column()][greenRobot.row()] = RobotPiece.GREEN_ROBOT;
+        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 12, 12);
+        robotLocations[yellowRobot.column()][yellowRobot.row()] = RobotPiece.YELLOW_ROBOT;
         
         //flip a card
         targetGoal = Goal.RED_STAR;
@@ -214,10 +214,10 @@ public class GameboardLW {
             System.arraycopy(g.goalLocations[i], 0, goalLocations[i], 0, 16);
         }
         targetGoal = g.targetGoal;
-        redRobot = g.redRobot;
-        blueRobot = g.blueRobot;
-        greenRobot = g.greenRobot;
-        yellowRobot = g.yellowRobot;
+        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, g.redRobot.column(), g.redRobot.row());
+        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, g.blueRobot.column(), g.blueRobot.row());
+        greenRobot = new RobotBookmark(RobotPiece.GREEN_ROBOT, g.greenRobot.column(), g.greenRobot.row());
+        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, g.yellowRobot.column(), g.yellowRobot.row());
         boardIsSolved = g.boardIsSolved;
     }
     
@@ -277,33 +277,32 @@ public class GameboardLW {
     
     public void moveRobot(RobotPiece r, Direction d) {
         int oldX, oldY;
-        switch (r) {
-            case RED_ROBOT:
-                oldX = redRobot.column();
-                oldY = redRobot.row();
-                break;
-            case BLUE_ROBOT:
-                oldX = blueRobot.column();
-                oldY = blueRobot.row();
-                break;
-            case YELLOW_ROBOT:
-                oldX = yellowRobot.column();
-                oldY = yellowRobot.row();
-                break;
-            case GREEN_ROBOT:
-                oldX = greenRobot.column();
-                oldY = greenRobot.row();
-                break;
-            default:
-                oldX = -1;
-                oldY = -1;
-                break;
-        }
-        
-        int newX = oldX;
-        int newY = oldY;
-        
+        int newX = -1, newY = -1;
         while (robotCanMove(r,d)) {
+            switch (r) {
+                case RED_ROBOT:
+                    oldX = redRobot.column();
+                    oldY = redRobot.row();
+                    break;
+                case BLUE_ROBOT:
+                    oldX = blueRobot.column();
+                    oldY = blueRobot.row();
+                    break;
+                case YELLOW_ROBOT:
+                    oldX = yellowRobot.column();
+                    oldY = yellowRobot.row();
+                    break;
+                case GREEN_ROBOT:
+                    oldX = greenRobot.column();
+                    oldY = greenRobot.row();
+                    break;
+                default:
+                    oldX = -1;
+                    oldY = -1;
+                    break;
+            }
+            newX = oldX;
+            newY = oldY;
             switch (d) {
                 case NORTH:
                     newY--;
@@ -323,24 +322,25 @@ public class GameboardLW {
                     redRobot.setLoc(newX, newY);
                     break;
                 case BLUE_ROBOT:
-                    redRobot.setLoc(newX, newY);
+                    blueRobot.setLoc(newX, newY);
                     break;
                 case YELLOW_ROBOT:
-                    redRobot.setLoc(newX, newY);
+                    yellowRobot.setLoc(newX, newY);
                     break;
                 case GREEN_ROBOT:
-                    redRobot.setLoc(newX, newY);
+                    greenRobot.setLoc(newX, newY);
                     break;
             }
-            robotLocations[newX][newY] = r;
             robotLocations[oldX][oldY] = RobotPiece.NO_ROBOT;
+            robotLocations[newX][newY] = r;
         }
-
         // check for solution
         if (robotLocations[newX][newY].color().equals(goalLocations[newX][newY].color())
                 && robotLocations[newX][newY].color().equals(targetGoal.color())
-                && goalLocations[newX][newY].type().equals(targetGoal.type()))
+                && goalLocations[newX][newY] == targetGoal)
             boardIsSolved = true;
+        if (boardIsSolved)
+            System.out.println("here it is...");
     }
     
     private class RobotBookmark {
