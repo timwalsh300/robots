@@ -80,6 +80,7 @@ public class GameboardLW {
         barriersNorth[7][6] = true;
         barriersNorth[12][6] = true;
         barriersNorth[3][9] = true;
+        barriersNorth[15][9] = true;
         barriersNorth[8][10] = true;
         barriersNorth[13][10] = true;
         barriersNorth[1][12] = true;
@@ -175,7 +176,7 @@ public class GameboardLW {
         
         blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 13, 13);
         robotLocations[blueRobot.column()][blueRobot.row()] = RobotPiece.BLUE_ROBOT;
-        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 15, 9);
+        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 9, 9);
         robotLocations[redRobot.column()][redRobot.row()] = RobotPiece.RED_ROBOT;
         greenRobot = new RobotBookmark(RobotPiece.GREEN_ROBOT, 2, 14);
         robotLocations[greenRobot.column()][greenRobot.row()] = RobotPiece.GREEN_ROBOT;
@@ -339,8 +340,8 @@ public class GameboardLW {
                 && robotLocations[newX][newY].color().equals(targetGoal.color())
                 && goalLocations[newX][newY] == targetGoal)
             boardIsSolved = true;
-        if (boardIsSolved)
-            System.out.println("here it is...");
+//        if (boardIsSolved)
+//            System.out.println("here it is...");
     }
     
     private class RobotBookmark {

@@ -29,6 +29,9 @@ public class Robots {
         thread1.start();
         // thread2.start();
         // etc.
+        
+        System.out.println(player1.getName() + " is running...");
+        //System.out.println(player2.getName() + " is running...");
     }
     
 }
