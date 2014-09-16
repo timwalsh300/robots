@@ -102,6 +102,7 @@ public class GameboardLW {
         barriersSouth[7][5] = true;
         barriersSouth[12][5] = true;
         barriersSouth[3][8] = true;
+        barriersSouth[15][8] = true;
         barriersSouth[8][9] = true;
         barriersSouth[13][9] = true;
         barriersSouth[1][11] = true;
@@ -138,7 +139,7 @@ public class GameboardLW {
         barriersWest[11][0] = true;
         barriersWest[9][1] = true;
         barriersWest[6][2] = true;
-        barriersWest[13][2] = true;
+        barriersWest[15][2] = true;
         barriersWest[3][4] = true;
         barriersWest[11][4] = true;
         barriersWest[7][5] = true;
@@ -174,13 +175,13 @@ public class GameboardLW {
         goalLocations[2][14] = Goal.GREEN_GEAR;
         goalLocations[9][14] = Goal.BLUE_MOON;
         
-        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 13, 13);
+        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 0, 13);
         robotLocations[blueRobot.column()][blueRobot.row()] = RobotPiece.BLUE_ROBOT;
-        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 9, 9);
+        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 0, 15);
         robotLocations[redRobot.column()][redRobot.row()] = RobotPiece.RED_ROBOT;
         greenRobot = new RobotBookmark(RobotPiece.GREEN_ROBOT, 2, 14);
         robotLocations[greenRobot.column()][greenRobot.row()] = RobotPiece.GREEN_ROBOT;
-        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 12, 12);
+        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 1, 15);
         robotLocations[yellowRobot.column()][yellowRobot.row()] = RobotPiece.YELLOW_ROBOT;
         
         //flip a card
@@ -340,8 +341,6 @@ public class GameboardLW {
                 && robotLocations[newX][newY].color().equals(targetGoal.color())
                 && goalLocations[newX][newY] == targetGoal)
             boardIsSolved = true;
-//        if (boardIsSolved)
-//            System.out.println("here it is...");
     }
     
     private class RobotBookmark {

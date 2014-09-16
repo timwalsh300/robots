@@ -18,15 +18,17 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     
     private GameboardLW initialBoard;
     private String name, solution = " ";
-    private int bestNumberOfMoves = 6; // this initial number is the maximum depth to search
+    private int bestNumberOfMoves = 10; // this initial number is the maximum depth to search
     private int statesExamined = 0;
     private boolean hasFoundSolution = false;
     
+    @Override
     public void initialize(String n, GameboardLW b) {
         name = n;
         initialBoard = b;
     }
     
+    @Override
     public String getName() throws NullPointerException {
         try {
             return name;
@@ -45,17 +47,18 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
         System.out.println(getName() + " " + statesExamined);
     } 
     
+    @Override
     public boolean hasFoundSolution() {
         return hasFoundSolution;
     }
     
+    @Override
     public String getSolution() {
         if (this.hasFoundSolution())
             return (this.getName() + ", " + bestNumberOfMoves + " moves:" + solution);
         else
             return (this.getName() + " has no solution.");
     }
-    
     
     private void buildAndSearchTree(int depth, String solutionThusFar, GameboardLW gameState, RobotPiece lastRobot, Direction lastDir) {
         if (lastRobot != null && lastDir != null)
