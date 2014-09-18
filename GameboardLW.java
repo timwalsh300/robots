@@ -175,13 +175,13 @@ public class GameboardLW {
         goalLocations[2][14] = Goal.GREEN_GEAR;
         goalLocations[9][14] = Goal.BLUE_MOON;
         
-        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 0, 13);
-        robotLocations[blueRobot.column()][blueRobot.row()] = RobotPiece.BLUE_ROBOT;
-        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 0, 15);
+        redRobot = new RobotBookmark(RobotPiece.RED_ROBOT, 9, 9);
         robotLocations[redRobot.column()][redRobot.row()] = RobotPiece.RED_ROBOT;
+        blueRobot = new RobotBookmark(RobotPiece.BLUE_ROBOT, 13, 13);
+        robotLocations[blueRobot.column()][blueRobot.row()] = RobotPiece.BLUE_ROBOT;
         greenRobot = new RobotBookmark(RobotPiece.GREEN_ROBOT, 2, 14);
         robotLocations[greenRobot.column()][greenRobot.row()] = RobotPiece.GREEN_ROBOT;
-        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 1, 15);
+        yellowRobot = new RobotBookmark(RobotPiece.YELLOW_ROBOT, 12, 12);
         robotLocations[yellowRobot.column()][yellowRobot.row()] = RobotPiece.YELLOW_ROBOT;
         
         //flip a card
