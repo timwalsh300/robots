@@ -18,20 +18,19 @@ public class Robots {
 
     public static void main(String[] args) {
         
-        OptimalRobotsPlayer player1 = new OptimalRobotsPlayer();
-        player1.initialize("OptimalPlayer", new GameboardLW());
-        Thread thread1 = new Thread(player1);
+        Thread p1 = new Thread(new OptimalRobotsPlayer("OptimalPlayer", new GameboardLW()));
+        //Thread p2 = new Thread(new NextRobotsPlayer("NextPlayer", new GameboardLW()));
         
-        // AnotherPlayer player2 = new AnotherPlayer();
-        // player2.initialize("player2", game);
-        // Thread thread2 = new Thread(player2);
+        p1.start();
+        //p2.start();
         
-        thread1.start();
-        // thread2.start();
-        // etc.
-        
-        System.out.println(player1.getName() + " is running...");
-        //System.out.println(player2.getName() + " is running...");
+        try {
+            p1.join();
+            //p2.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("InterruptedException: " + e.getMessage());
+        }
     }
     
 }

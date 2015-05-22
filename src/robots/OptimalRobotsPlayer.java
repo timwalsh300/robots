@@ -17,15 +17,27 @@ package robots;
 public class OptimalRobotsPlayer implements RobotsPlayer{
     
     private GameboardLW initialBoard;
-    private String name, solution = " ";
-    private int bestNumberOfMoves = 0;
-    private int statesExamined = 0;
-    private boolean hasFoundSolution = false;
+    private String name, solution;
+    private int bestNumberOfMoves;
+    private int statesExamined;
+    private boolean hasFoundSolution;
     
-    @Override
-    public void initialize(String n, GameboardLW b) {
+    public OptimalRobotsPlayer(String n, GameboardLW b) {
         name = n;
         initialBoard = b;
+        hasFoundSolution = false;
+        statesExamined = 0;
+        bestNumberOfMoves = 0;
+        solution = " ";
+    }
+    
+    @Override
+    public synchronized void reinitialize(GameboardLW b) {
+        initialBoard = b;
+        hasFoundSolution = false;
+        statesExamined = 0;
+        bestNumberOfMoves = 0;
+        solution = " ";
     }
     
     @Override
@@ -40,7 +52,7 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
     
     //must override the run() method for actions to perform in its own thread
     @Override
-    public void run() {
+    public synchronized void run() {
         // insert player logic here:
         while (!hasFoundSolution) {
             bestNumberOfMoves++;
@@ -48,16 +60,17 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
         }
         
         // print name and solution to the console somewhere in here
-        System.out.println(getName() + " " + statesExamined);
+        System.out.println(this.getName() + ", " + bestNumberOfMoves + " moves:" + solution);
+        System.out.println(getName() + " examined " + statesExamined + " board states.");
     } 
     
     @Override
-    public boolean hasFoundSolution() {
+    public synchronized boolean hasFoundSolution() {
         return hasFoundSolution;
     }
     
     @Override
-    public String getSolution() {
+    public synchronized String getSolution() {
         if (this.hasFoundSolution())
             return (this.getName() + ", " + bestNumberOfMoves + " moves:" + solution);
         else
@@ -73,7 +86,6 @@ public class OptimalRobotsPlayer implements RobotsPlayer{
         else if (gameState.boardIsSolved()) {
             hasFoundSolution = true;
             solution = solutionThusFar;
-            System.out.println(getSolution());
             return;
         }
         else {
