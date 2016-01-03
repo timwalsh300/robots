@@ -1,36 +1,36 @@
 /*
- * This project simulates a version of the game "Ricochet Robots" in order
- * to automate and test various human player strategies (that take into
- * consideration limited working memory) against the optimal benchmark 
- * algorithm than can only be executed by a computer.
- *
- * Contributors are Nate Stickney and Tim Walsh.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package robots;
 
-/**
- * This is main class that will construct the game board, instantiate the
- * players, and run them.
- * 
- */
-public class Robots {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+/**
+ *
+ * @author timwalsh300
+ */
+public class Robots extends Application {
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        HBox root = (HBox) FXMLLoader.load(getClass().getResource("RobotsDocument.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("RobotsCSS.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        
-        Thread p1 = new Thread(new OptimalRobotsPlayer("OptimalPlayer", new GameboardLW()));
-        //Thread p2 = new Thread(new NextRobotsPlayer("NextPlayer", new GameboardLW()));
-        
-        p1.start();
-        //p2.start();
-        
-        try {
-            p1.join();
-            //p2.join();
-        }
-        catch (InterruptedException e) {
-            System.out.println("InterruptedException: " + e.getMessage());
-        }
+        launch(args);
     }
     
 }

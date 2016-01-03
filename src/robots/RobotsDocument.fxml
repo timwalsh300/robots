@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox fx:id="bigPane" prefHeight="600" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robots.RobotsDocumentController">
+    <StackPane fx:id="leftPane" prefHeight="600" prefWidth="600">
+        <GridPane fx:id="boardGrid" />
+    </StackPane>
+    <VBox fx:id="rightPane" prefHeight="600" prefWidth="200" />
+</HBox>

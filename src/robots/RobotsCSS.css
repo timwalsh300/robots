@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 24, 2015, 8:32:05 PM
+    Author     : timwalsh300
+*/
+
+#leftPane {
+    -fx-background-color: gray;
+}
+
+.combo-box {
+  -fx-background-image: url("center.jpg");
+  -fx-background-position: center;
+  -fx-min-height: 30px;
+  -fx-max-height: 30px;
+  -fx-min-width: 30px;
+  -fx-max-width: 30px;
+}
+
+.cornerlabel {
+  -fx-graphic: url("corner.jpg");
+  -fx-graphic-position: center;
+  -fx-min-height: 15px;
+  -fx-max-height: 15px;
+  -fx-min-width: 15px;
+  -fx-max-width: 15px;
+}
+
+.vbarrier {
+  -fx-background-image: url("vnowall.jpg");
+  -fx-background-position: center;
+  -fx-min-height: 30px;
+  -fx-max-height: 30px;
+  -fx-min-width: 15px;
+  -fx-max-width: 15px;
+}
+
+.hbarrier {
+  -fx-background-image: url("hnowall.jpg");
+  -fx-background-position: center;
+  -fx-min-height: 15px;
+  -fx-max-height: 15px;
+  -fx-min-width: 30px;
+  -fx-max-width: 30px;
+}
+
+.vbarrier:selected {
+  -fx-background-image: url("vwall.jpg");
+  -fx-background-position: center;
+}
+
+.hbarrier:selected {
+  -fx-background-image: url("hwall.jpg");
+  -fx-background-position: center;
+}
