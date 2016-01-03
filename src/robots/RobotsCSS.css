@@ -13,7 +13,7 @@ and open the template in the editor.
 }
 
 .combo-box {
-  -fx-background-image: url("center.jpg");
+  -fx-background-image: url("images/center.jpg");
   -fx-background-position: center;
   -fx-min-height: 30px;
   -fx-max-height: 30px;
@@ -22,7 +22,7 @@ and open the template in the editor.
 }
 
 .cornerlabel {
-  -fx-graphic: url("corner.jpg");
+  -fx-graphic: url("images/corner.jpg");
   -fx-graphic-position: center;
   -fx-min-height: 15px;
   -fx-max-height: 15px;
@@ -31,7 +31,7 @@ and open the template in the editor.
 }
 
 .vbarrier {
-  -fx-background-image: url("vnowall.jpg");
+  -fx-background-image: url("images/vnowall.jpg");
   -fx-background-position: center;
   -fx-min-height: 30px;
   -fx-max-height: 30px;
@@ -40,7 +40,7 @@ and open the template in the editor.
 }
 
 .hbarrier {
-  -fx-background-image: url("hnowall.jpg");
+  -fx-background-image: url("images/hnowall.jpg");
   -fx-background-position: center;
   -fx-min-height: 15px;
   -fx-max-height: 15px;
@@ -49,11 +49,11 @@ and open the template in the editor.
 }
 
 .vbarrier:selected {
-  -fx-background-image: url("vwall.jpg");
+  -fx-background-image: url("images/vwall.jpg");
   -fx-background-position: center;
 }
 
 .hbarrier:selected {
-  -fx-background-image: url("hwall.jpg");
+  -fx-background-image: url("images/hwall.jpg");
   -fx-background-position: center;
 }
