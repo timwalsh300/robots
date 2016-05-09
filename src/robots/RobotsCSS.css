@@ -13,7 +13,7 @@ and open the template in the editor.
 }
 
 .combo-box {
-  -fx-background-image: url("images/center.jpg");
+  -fx-background-image: url("images/space.jpg");
   -fx-background-position: center;
   -fx-min-height: 30px;
   -fx-max-height: 30px;
